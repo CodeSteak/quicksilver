@@ -48,8 +48,8 @@ impl Drawable for Vector {
 
 impl Drawable for Rectangle {
     fn draw<'a>(&self, mesh: &mut Mesh, bkg: Background<'a>, trans: Transform, z: impl Scalar) {
-        let trans = Transform::translate(self.top_left() + self.size() / 2)
-            * trans
+        let trans = trans
+            * Transform::translate(self.top_left() + self.size() / 2)
             * Transform::translate(-self.size() / 2)
             * Transform::scale(self.size());
         let tex_trans = bkg.image().map(|img| img.projection(Rectangle::new_sized((1, 1))));
